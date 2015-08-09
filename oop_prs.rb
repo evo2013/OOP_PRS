@@ -1,20 +1,15 @@
 require 'pry'
 
 class Computer
-  OPTIONS = { "p" => "paper", "r" => "rock", "s" => "scissors"}
-
-  def initialize
-  end
 
   def choice
-    computer_choice = OPTIONS.keys.sample
-    puts "The computer chose #{OPTIONS[computer_choice]}."
+    computer_choice = Game::OPTIONS.keys.sample
+    puts "The computer chose #{Game::OPTIONS[computer_choice]}."
     computer_choice
   end
 end
 
 class Player
-  OPTIONS = { "p" => "paper", "r" => "rock", "s" => "scissors"}
   attr_accessor  :name, :player_choice
 
   def initialize
@@ -31,9 +26,9 @@ class Player
       puts
       puts "#{name}, choose between [P]aper, [R]ock or [S]cissors"
       player_choice = gets.chomp.downcase
-    end until OPTIONS.keys.include?(player_choice)
+    end until Game::OPTIONS.keys.include?(player_choice)
       puts ""
-      puts "#{name} chose #{OPTIONS[player_choice]}."
+      puts "#{name} chose #{Game::OPTIONS[player_choice]}."
       player_choice 
   end
 end
@@ -64,14 +59,13 @@ class Game
     if pc == cc
       puts "It's a tie!"
       play_again?
-    elsif
-      (pc == 'p' && cc == 'r') || (pc == 'r' && cc == 's') || (pc == 's' && cc == 'p')
-       print_winner(pc)
-       play_again?
+    elsif (pc == 'p' && cc == 'r') || (pc == 'r' && cc == 's') || (pc == 's' && cc == 'p')
+      print_winner(pc)
+      play_again?
     else
-        puts
-        puts "Computer AI wins!"
-        play_again?
+      puts
+      puts "Computer AI wins!"
+      play_again?
     end
   end
 
